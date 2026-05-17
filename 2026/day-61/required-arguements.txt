@@ -1,0 +1,195 @@
+Terraform AWS Resource Cheat Sheet
+
+1) EC2 → aws_instance
+Required:
+- ami
+- instance_type
+
+Common Optional:
+- subnet_id
+- vpc_security_group_ids
+- key_name
+- associate_public_ip_address
+- iam_instance_profile
+- user_data
+- tags
+
+
+2) VPC → aws_vpc
+Required:
+- cidr_block
+
+Common Optional:
+- enable_dns_support
+- enable_dns_hostnames
+- instance_tenancy
+- tags
+
+
+3) Subnet → aws_subnet
+Required:
+- vpc_id
+- cidr_block
+
+Common Optional:
+- availability_zone
+- map_public_ip_on_launch
+- tags
+
+
+4) Security Group → aws_security_group
+Required:
+- vpc_id
+
+Common Optional:
+- name
+- description
+- ingress {}
+- egress {}
+- tags
+
+
+5) Internet Gateway → aws_internet_gateway
+Required:
+- vpc_id
+
+Common Optional:
+- tags
+
+
+6) Route Table → aws_route_table
+Required:
+- vpc_id
+
+Common Optional:
+- route {}
+- tags
+
+
+7) Route Table Association → aws_route_table_association
+Required:
+- subnet_id
+- route_table_id
+
+
+8) S3 Bucket → aws_s3_bucket
+Required:
+- bucket
+
+Common Optional:
+- tags
+- versioning
+- lifecycle_rule
+
+
+9) IAM Role → aws_iam_role
+Required:
+- name
+- assume_role_policy
+
+Common Optional:
+- tags
+
+
+10) IAM Policy Attachment → aws_iam_role_policy_attachment
+Required:
+- role
+- policy_arn
+
+
+11) Load Balancer → aws_lb
+Required:
+- name
+- subnets
+
+Common Optional:
+- security_groups
+- internal
+- tags
+
+
+12) Target Group → aws_lb_target_group
+Required:
+- name
+- port
+- protocol
+- vpc_id
+
+
+13) Listener → aws_lb_listener
+Required:
+- load_balancer_arn
+- port
+- protocol
+- default_action
+
+
+14) RDS → aws_db_instance
+Required:
+- allocated_storage
+- engine
+- instance_class
+- username
+- password
+
+Common Optional:
+- db_name
+- publicly_accessible
+- tags
+
+
+15) Auto Scaling Group → aws_autoscaling_group
+Required:
+- desired_capacity
+- max_size
+- min_size
+- vpc_zone_identifier
+
+Common Optional:
+- target_group_arns
+- launch_template
+
+
+16) Launch Template → aws_launch_template
+Required:
+- image_id
+- instance_type
+
+Common Optional:
+- key_name
+- security_group_names
+- tags
+
+
+17) EBS Volume → aws_ebs_volume
+Required:
+- availability_zone
+- size
+
+Common Optional:
+- type
+- tags
+
+
+18) EBS Attachment → aws_volume_attachment
+Required:
+- device_name
+- volume_id
+- instance_id
+
+
+19) Elastic IP → aws_eip
+Required:
+- domain = "vpc"
+
+Common Optional:
+- tags
+
+
+20) NAT Gateway → aws_nat_gateway
+Required:
+- allocation_id
+- subnet_id
+
+Common Optional:
+- tags
